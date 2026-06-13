@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عيد ميلاد محمد — من مروه</title>
+  <meta name="description" content="صفحة عيد ميلاد محمد، هدية من قلب مروه بكل الحب والتقدير" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================
+       RESET & BASE
+    ============================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary:    #0d1117;
+      --bg-secondary:  #12101f;
+      --bg-card:       #1a1730;
+      --bg-card-hover: #1f1d38;
+      --gold:          #c9a84c;
+      --gold-light:    #e0c87a;
+      --gold-dim:      #8a6e2f;
+      --cream:         #f5eedc;
+      --cream-dim:     #c8bfa8;
+      --accent-glow:   rgba(201, 168, 76, 0.15);
+      --border-gold:   rgba(201, 168, 76, 0.25);
+      --star-color:    rgba(201, 168, 76, 0.6);
+
+      --font-display: 'Amiri', serif;
+      --font-body:    'Cairo', sans-serif;
+
+      --section-pad: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem);
+      --radius-card: 16px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ============================
+       STARFIELD / PARTICLES
+    ============================ */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--star-color);
+      animation: drift linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0.5);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 0.8; }
+      100% {
+        transform: translateY(-10vh) translateX(var(--tx)) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.4); }
+    }
+
+    .star-fixed {
+      position: fixed;
+      border-radius: 50%;
+      background: white;
+      animation: twinkle ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================
+       LAYOUT WRAPPERS
+    ============================ */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
+
+    /* ============================
+       FADE-IN ANIMATION SYSTEM
+    ============================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-in {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .slide-in.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ============================
+       SECTION DIVIDER
+    ============================ */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto 4rem;
+      max-width: 400px;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--gold-dim));
+    }
+    .divider::after {
+      background: linear-gradient(to right, transparent, var(--gold-dim));
+    }
+    .divider span {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    /* ============================
+       HERO SECTION
+    ============================ */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--section-pad);
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: min(600px, 90vw);
+      height: min(600px, 90vw);
+      background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: pulse-glow 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -55%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -55%) scale(1.08); }
+    }
+
+    .hero-top-label {
+      font-family: var(--font-body);
+      font-size: clamp(0.75rem, 2vw, 0.9rem);
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: hero-cascade 1s ease forwards 0.3s;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 15vw, 9rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: hero-cascade 1.2s ease forwards 0.6s;
+      text-shadow: 0 0 60px rgba(201, 168, 76, 0.2);
+    }
+
+    .hero-name span {
+      color: var(--gold);
+      display: inline-block;
+      animation: hero-cascade 1.2s ease forwards 0.6s, shimmer 4s ease-in-out infinite 2s;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.3); }
+      50%       { text-shadow: 0 0 50px rgba(201,168,76,0.7), 0 0 80px rgba(201,168,76,0.2); }
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+      font-weight: 400;
+      color: var(--cream-dim);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: hero-cascade 1s ease forwards 1s;
+      max-width: 560px;
+      font-style: italic;
+    }
+
+    .hero-from {
+      font-family: var(--font-body);
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: var(--gold-dim);
+      letter-spacing: 0.1em;
+      opacity: 0;
+      animation: hero-cascade 1s ease forwards 1.4s;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: hero-cascade 1s ease forwards 2s;
+    }
+
+    .hero-scroll-hint span {
+      font-size: 0.75rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.15em;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-left: 1.5px solid var(--gold-dim);
+      border-bottom: 1.5px solid var(--gold-dim);
+      transform: rotate(-45deg);
+      animation: bounce-down 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce-down {
+      0%, 100% { transform: rotate(-45deg) translateY(0); }
+      50%       { transform: rotate(-45deg) translateY(6px); }
+    }
+
+    @keyframes hero-cascade {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================
+       TIMELINE SECTION
+    ============================ */
+    #timeline {
+      padding: var(--section-pad);
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+      font-weight: 700;
+      color: var(--cream);
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      color: var(--cream-dim);
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .timeline-track {
+      position: relative;
+      padding-right: 2.5rem;
+    }
+
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--gold-dim) 20%, var(--gold-dim) 80%, transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3.5rem;
+      padding-right: 2.5rem;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      right: -6px;
+      top: 0.35rem;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg-primary);
+      box-shadow: 0 0 12px rgba(201, 168, 76, 0.5);
+      transition: box-shadow 0.3s;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      box-shadow: 0 0 24px rgba(201, 168, 76, 0.9);
+    }
+
+    .timeline-date {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-event {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .timeline-desc {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--cream-dim);
+      line-height: 1.7;
+    }
+
+    .timeline-number {
+      position: absolute;
+      right: -42px;
+      top: -2px;
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: rgba(201, 168, 76, 0.06);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ============================
+       CAROUSEL / HIS WORDS
+    ============================ */
+    #his-words {
+      padding: var(--section-pad);
+      background: var(--bg-primary);
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .carousel-track {
+      overflow: hidden;
+      border-radius: var(--radius-card);
+    }
+
+    .carousel-slide {
+      display: none;
+      padding: 3rem 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-card);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: slide-appear 0.6s ease;
+    }
+
+    @keyframes slide-appear {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .carousel-slide.active {
+      display: block;
+    }
+
+    .carousel-slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.15;
+      line-height: 0.6;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.85;
+      font-style: italic;
+    }
+
+    .quote-attr {
+      margin-top: 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      padding: 0;
+    }
+
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid var(--border-gold);
+      color: var(--gold);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-glow);
+      border-color: var(--gold);
+    }
+
+    /* ============================
+       HER LETTER
+    ============================ */
+    #her-letter {
+      padding: var(--section-pad);
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    }
+
+    .letter-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-card);
+      padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(201,168,76,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .letter-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .letter-salutation {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .letter-body {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.8vw, 1.2rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 2.2;
+      white-space: pre-line;
+    }
+
+    .letter-signature {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.3rem;
+    }
+
+    .letter-signature .sig-line {
+      width: 80px;
+      height: 1px;
+      background: var(--gold-dim);
+      margin-bottom: 0.4rem;
+    }
+
+    .letter-signature span {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .letter-signature small {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--gold-dim);
+    }
+
+    /* ============================
+       CLOSING SECTION
+    ============================ */
+    #closing {
+      padding: var(--section-pad);
+      text-align: center;
+      background: var(--bg-primary);
+      position: relative;
+    }
+
+    .closing-stars {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .closing-stars span {
+      display: inline-block;
+      animation: star-float 3s ease-in-out infinite;
+      color: var(--gold);
+    }
+
+    .closing-stars span:nth-child(2) { animation-delay: 0.5s; }
+    .closing-stars span:nth-child(3) { animation-delay: 1s;   }
+    .closing-stars span:nth-child(4) { animation-delay: 1.5s; }
+    .closing-stars span:nth-child(5) { animation-delay: 2s;   }
+
+    @keyframes star-float {
+      0%, 100% { transform: translateY(0);    opacity: 0.7; }
+      50%       { transform: translateY(-8px); opacity: 1;   }
+    }
+
+    .closing-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .closing-from {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 3rem;
+    }
+
+    .hearts {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      font-size: 1.6rem;
+    }
+
+    .heart {
+      display: inline-block;
+      color: var(--gold);
+      animation: heartbeat 2s ease-in-out infinite;
+    }
+
+    .heart:nth-child(2) { animation-delay: 0.3s; font-size: 2rem; }
+    .heart:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15%       { transform: scale(1.25); }
+      30%       { transform: scale(1); }
+      45%       { transform: scale(1.15); }
+      60%       { transform: scale(1); }
+    }
+
+    .footer-note {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: rgba(245, 238, 220, 0.2);
+      letter-spacing: 0.1em;
+    }
+
+    /* ============================
+       REDUCED MOTION
+    ============================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .particle,
+      .star-fixed {
+        display: none;
+      }
+      .fade-in, .slide-in {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* ============================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 480px) {
+      .timeline-track {
+        padding-right: 1.75rem;
+      }
+      .timeline-item {
+        padding-right: 1.75rem;
+      }
+      .timeline-number {
+        display: none;
+      }
+      .carousel-slide {
+        padding: 2rem 1.5rem;
+      }
+      .letter-card {
+        padding: 2rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STARFIELD -->
+  <div id="starfield" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- ========================
+         HERO
+    ========================= -->
+    <section id="hero" aria-label="الصفحة الرئيسية">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <p class="hero-top-label">✦ عيد ميلاد سعيد ✦</p>
+
+      <h1 class="hero-name"><span>محمد</span></h1>
+
+      <p class="hero-subtitle">
+        "مبسوط وفخور إنكِ في حياتي أوي"
+      </p>
+
+      <p class="hero-from">من قلب مروه — بكل الحب</p>
+
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>اكتشف</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ========================
+         TIMELINE
+    ========================= -->
+    <section id="timeline" aria-label="محطاتنا">
+      <div class="container">
+
+        <h2 class="section-heading fade-in">محطاتنا معًا</h2>
+        <p class="section-sub fade-in">كل تاريخ منهم بداية قصة جميلة</p>
+
+        <div class="divider fade-in"><span>✦</span></div>
+
+        <div class="timeline-track">
+
+          <article class="timeline-item slide-in" aria-label="أول محادثة">
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">١</div>
+            <p class="timeline-date">١٣ نوفمبر ٢٠٢٠</p>
+            <h3 class="timeline-event">أول محادثة</h3>
+            <p class="timeline-desc">من هنا بدأت الحكاية — كلمة أولت فتحت باب دنيا كاملة.</p>
+          </article>
+
+          <article class="timeline-item slide-in" aria-label="أول لقاء">
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">٢</div>
+            <p class="timeline-date">٢ يناير ٢٠٢١</p>
+            <h3 class="timeline-event">أول مرة شفنا بعض</h3>
+            <p class="timeline-desc">اللحظة اللي مبقدرش يقف قصادها — حين صارت الصورة حقيقة.</p>
+          </article>
+
+          <article class="timeline-item slide-in" aria-label="الرؤية الشرعية">
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">٣</div>
+            <p class="timeline-date">٤ سبتمبر ٢٠٢٥</p>
+            <h3 class="timeline-event">الرؤية الشرعية</h3>
+            <p class="timeline-desc">خطوة بالحلال، وبداية الطريق الصح بإذن الله.</p>
+          </article>
+
+          <article class="timeline-item slide-in" aria-label="قراءة الفاتحة">
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">٤</div>
+            <p class="timeline-date">١٢ سبتمبر ٢٠٢٥</p>
+            <h3 class="timeline-event">قراءة الفاتحة</h3>
+            <p class="timeline-desc">بسم الله وعلى بركة الله — اتفتح الكتاب بأجمل صفحة.</p>
+          </article>
+
+          <article class="timeline-item slide-in" aria-label="الخطوبة">
+            <div class="timeline-dot"></div>
+            <div class="timeline-number">٥</div>
+            <p class="timeline-date">١ أكتوبر ٢٠٢٥</p>
+            <h3 class="timeline-event">الخطوبة 💍</h3>
+            <p class="timeline-desc">الخاتم في الإيد، والقلب في مكانه — والله يتمم بالخير.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================
+         HIS WORDS
+    ========================= -->
+    <section id="his-words" aria-label="كلامه">
+      <div class="container">
+
+        <h2 class="section-heading fade-in">كلامه هو</h2>
+        <p class="section-sub fade-in">لما بيتكلم محمد، الكلام بييجي من القلب مباشرة</p>
+
+        <div class="divider fade-in"><span>✦</span></div>
+
+        <div class="carousel-wrapper fade-in" role="region" aria-label="اقتباسات محمد" aria-live="polite">
+          <div class="carousel-track" id="carouselTrack">
+
+            <div class="carousel-slide active" role="group" aria-label="اقتباس ١ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">انتِ من النعيم المعجل في الدنيا يا مروه</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٢ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">الحمد الله على نعمة قلبكِ يا مروه</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٣ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">أنا اتخطيت معاكِ مرحلة الحب — أنا هيمان بجد</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٤ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">ما بالُ طيفكِ غازيًا كُلّ الوجوه<br/>ما بالُ عيني غيرَ حُسنكِ لا ترى</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٥ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">مبقدرش أقف قصاد عيونك</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٦ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">ياريت كل الدنيا بخفتك عليا</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٧ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">لو مالَ قلبي عن هواكِ نزعتُه<br/>وشريتُ قلبًا في هواكِ يذوبُ</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٨ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">الوحيدة اللي ممكن أغير من نفسي عشانها</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ٩ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">مفيش قاعدة بتونس بيها زي قعدتك<br/>إن غبتِ لم ألقَ إنسانًا يؤنسني<br/>وإن حضرتِ فكل الناس قد حضروا</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ١٠ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">مبسوط وفخور إنكِ في حياتي أوي، الحاجة الوحيدة اللي اختارتها، وربنا كتبلي فيها التوفيق</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+            <div class="carousel-slide" role="group" aria-label="اقتباس ١١ من ١١">
+              <span class="quote-mark" aria-hidden="true">"</span>
+              <p class="quote-text">انتِ تاج راس محمد والله</p>
+              <p class="quote-attr">— محمد</p>
+            </div>
+
+          </div>
+
+          <nav class="carousel-dots" aria-label="التنقل بين الاقتباسات" id="carouselDots"></nav>
+
+          <div class="carousel-nav" aria-label="أزرار التنقل">
+            <button class="nav-btn" id="prevBtn" aria-label="الاقتباس السابق">&#8592;</button>
+            <button class="nav-btn" id="nextBtn" aria-label="الاقتباس التالي">&#8594;</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================
+         HER LETTER
+    ========================= -->
+    <section id="her-letter" aria-label="رسالة مروه">
+      <div class="container">
+
+        <h2 class="section-heading fade-in">من قلب مروه</h2>
+        <p class="section-sub fade-in">كلام ما فيش كلام يوصف حجمه</p>
+
+        <div class="divider fade-in"><span>✦</span></div>
+
+        <article class="letter-card fade-in" aria-label="رسالة مروه لمحمد">
+          <span class="letter-salutation">يا حبيب قلبي الوحيد — محمدي وحبيبي،</span>
+          <p class="letter-body">كل عام وأنت كل الخير يا حبيبي.
+
+والسنة الجايه نحتفل سوا في بيتنا واحنا متهنيين سوا يارب. وربنا مبارك لينا.
+
+الله يديمك ليا العمر كله يا محمد ويديم حسك في حياتي.
+
+الله لا يحرمني وجودك.
+
+يارب تفضل ديما ملجأ ليا يا محمد وربنا ميطفيش لمعتي في عيونك أبدا وأفضل ديما حبيبتك.
+
+كل حاجة بينا في قلبي وعمري ما أنسى إنك معايا من أول لحظة ووفيت بوعدك ليا.</p>
+
+          <div class="letter-signature">
+            <div class="sig-line"></div>
+            <span>مروه</span>
+            <small>بكل قلبها ✦</small>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========================
+         CLOSING
+    ========================= -->
+    <section id="closing" aria-label="الختام">
+      <div class="container">
+
+        <div class="closing-stars fade-in" aria-hidden="true">
+          <span>✦</span>
+          <span>★</span>
+          <span>✦</span>
+          <span>★</span>
+          <span>✦</span>
+        </div>
+
+        <p class="closing-text fade-in">كل عام وأنت بخير<br/>يا محمد</p>
+
+        <p class="closing-from fade-in">من مروه — بكل حب</p>
+
+        <div class="hearts fade-in" aria-label="قلوب الحب">
+          <span class="heart">♡</span>
+          <span class="heart">♥</span>
+          <span class="heart">♡</span>
+        </div>
+
+        <p class="footer-note">✦ صُنع بالحب — ٢٠٢٦ ✦</p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* ============================
+       STARFIELD
+    ============================ */
+    (function buildStarfield() {
+      const pref = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (pref) return;
+
+      const container = document.getElementById('starfield');
+
+      // Fixed twinkling stars
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star-fixed';
+        const size = Math.random() * 1.8 + 0.4;
+        star.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          top: ${Math.random() * 100}%;
+          left: ${Math.random() * 100}%;
+          animation-duration: ${Math.random() * 3 + 2}s;
+          animation-delay: ${Math.random() * 4}s;
+          opacity: ${Math.random() * 0.5 + 0.1};
+        `;
+        container.appendChild(star);
+      }
+
+      // Floating drifting particles
+      const PARTICLE_COUNT = 25;
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 2.5 + 1;
+        const duration = Math.random() * 20 + 15;
+        const delay = Math.random() * 15;
+        const tx = (Math.random() - 0.5) * 200;
+        const startLeft = Math.random() * 100;
+
+        p.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          left: ${startLeft}%;
+          bottom: -10px;
+          animation-duration: ${duration}s;
+          animation-delay: ${delay}s;
+          --tx: ${tx}px;
+        `;
+        container.appendChild(p);
+      }
+    })();
+
+    /* ============================
+       INTERSECTION OBSERVER
+    ============================ */
+    (function initScrollAnimations() {
+      const pref = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            if (!pref) observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-in, .slide-in').forEach((el, i) => {
+        // Stagger siblings
+        el.style.transitionDelay = `${(i % 5) * 0.12}s`;
+        observer.observe(el);
+      });
+
+      if (pref) {
+        document.querySelectorAll('.fade-in, .slide-in').forEach(el => {
+          el.classList.add('visible');
+        });
+      }
+    })();
+
+    /* ============================
+       CAROUSEL
+    ============================ */
+    (function initCarousel() {
+      const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+      const dotsContainer = document.getElementById('carouselDots');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      let current = 0;
+      let timer = null;
+      const INTERVAL = 4000;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `الانتقال للاقتباس ${i + 1}`);
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsContainer.appendChild(dot);
+      });
+
+      function getDots() {
+        return Array.from(dotsContainer.querySelectorAll('.dot'));
+      }
+
+      function goTo(index, userTriggered) {
+        slides[current].classList.remove('active');
+        getDots()[current].classList.remove('active');
+
+        current = (index + slides.length) % slides.length;
+
+        slides[current].classList.add('active');
+        getDots()[current].classList.add('active');
+
+        if (userTriggered) restartTimer();
+      }
+
+      function next() { goTo(current + 1, false); }
+
+      function startTimer() {
+        const pref = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (pref) return;
+        timer = setInterval(next, INTERVAL);
+      }
+
+      function restartTimer() {
+        clearInterval(timer);
+        startTimer();
+      }
+
+      prevBtn.addEventListener('click', () => goTo(current - 1, true));
+      nextBtn.addEventListener('click', () => goTo(current + 1, true));
+
+      // Keyboard navigation
+      document.getElementById('carouselTrack').addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') goTo(current - 1, true);
+        if (e.key === 'ArrowLeft')  goTo(current + 1, true);
+      });
+
+      startTimer();
+    })();
+  </script>
+
+</body>
+</html>
